@@ -1,6 +1,6 @@
 import sae
-
-class AgenteProsp():
+from agente.agente import Agente
+class AgenteProsp(Agente):
     """Classe base para um agente prospetivo.
 
     Um agente prospetivo combina a observação do ambiente com a decisão da ação orientada. Esta classe 

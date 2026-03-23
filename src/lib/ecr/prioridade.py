@@ -18,6 +18,10 @@ class Prioridade:
         recebidas e devolver a ação considerada mais importante no instante
         atual.
         """
-        # Este método deve retornar uma ação. `accoes` representa a lista de
-        # ações geradas pelos comportamentos ativos.
-        raise NotImplementedError
+        if not accoes:
+            return None
+        """Aqui, key é um parâmetro, que vai servir de critério pelo max para comparar as açoes da lista, 
+        e lambda é a função anónima que diz qual a prioridade a extrair de cada ação 
+        para que o max devolva a ação com o maior valor de prioridade.
+        """
+        return max(accoes, key=lambda acao: acao.prioridade)

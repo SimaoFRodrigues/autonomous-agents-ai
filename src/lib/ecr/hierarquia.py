@@ -1,24 +1,22 @@
-class Hierarquia:
-    """Representa uma estratégia hierárquica de seleção de ações.
-
-    No contexto deste trabalho, quando um comportamento composto ativa vários
-    comportamentos internos, podem surgir várias ações ao mesmo
-    tempo. Nessa situação é preciso definir hierarquia para escolher apenas uma ação final.
-    É precisamente aqui que entra o polimorfismo: o `ComportComp` pode invocar `selecionar_acao`
-    sem saber se a decisão está a ser feita por hierarquia, por prioridade ou por outro
+from ecr.comport_comp import ComportComp
+class Hierarquia(ComportComp):
+    """
+    A hierarquia é um comportamento composto de seleção de ação, em que os comportamentos
+    estão organixados numa hierarquia fixa de subsunção. Nessa situação é preciso definir hierarquia para 
+    escolher apenas uma ação final. É precisamente aqui que entra o polimorfismo: o `ComportComp` pode invocar
+    `selecionar_acao` sem saber se a decisão está a ser feita por hierarquia, por prioridade ou por outro
     critério qualquer. Desde que a subclasse respeite, o resto do sistema funciona da mesma forma.
-
-    Esta separação é importante na arquitetura do trabalho porque isola a decisão do mecanismo de ativação dos comportamentos. 
-    Os comportamentos produzem ações, a classe de seleção decide qual dessas ações prevalece.
     """
 
     def selecionar_acao(self, accoes):
-        """Seleciona uma ação a partir de uma lista hierárquica.
+        """Seleciona uma ação a partir de uma lista hierárquica dada como parâmetro.
 
-        A implementação deste método deve analisar o conjunto de
-        ações disponíveis e devolver a ação cujo nível hierárquico tem maior
-        precedência no contexto atual. 
+        A implementação deste método vai analisar o conjunto de ações disponíveis e 
+        devolver a ação cujo nível hierárquico tem maior precedência no contexto atual, 
+        nescte caso o primeiro elemento da lista de ações. 
         """
-        # Este método deve retornar uma ação. `accoes` representa a lista de
-        # ações produzidas pelos comportamentos ativos.
-        raise NotImplementedError
+        if accoes:
+            return accoes[0]
+        else:
+            return None
+

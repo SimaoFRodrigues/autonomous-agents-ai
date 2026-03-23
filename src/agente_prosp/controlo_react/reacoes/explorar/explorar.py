@@ -1,0 +1,31 @@
+# O módulo random permite gerar um valor aleatório entre 0 e 1,
+# e o choice vai ser usado para escolher um elemento aleatório de uma lista de direções
+
+from random import random, choice
+
+from agente_prosp.accoes.rodar import Rodar
+from agente_prosp.accoes.avancar import Avancar
+from sae.ambiente.direccao import Direccao
+
+class Explorar:
+    """
+    O objetivo do comportamento explorar decidir que ação de exploração gerar (Rodar ou Avancar). 
+    Este comportamento tem de ter o método ativar e vai rodar aleatoriamente com uma determinada probabilidade. 
+    """
+    def __init__(self, prob_rotacao = 0.7):
+        self.__prob_rotacao = prob_rotacao # probabilidade de rotação predefinida, que serve como threshold para ativar a ação aleatória
+
+    def ativar(self, percepcao):
+        """
+        Este método vai gerar e retornar uma ação aleatória. O parâmetro percepcao não vai ser usado porque
+        a decisão é feita independentemente da percepção, ou seja, tem baixo acoplamento funcional neste caso.
+        Além disso, usa polimorfismo porque pode ser trocada por outros comportamentos sem mudar o controlo.
+        """
+        if random() < self.__prob_rotacao: # se o valor aleatório for menor que a probabilidade de rotação, gera uma ação
+            # o Rodar vai retornar uma ação baseada na escolha aleatória de um membro da lista de Direcções e essa ação é
+            # guardada na variável acao
+            acao = Rodar(choice(list(Direccao))) 
+        else: 
+            acao = Avancar() # o método Avancar() simplesmente avança na direção que já está ativa
+    
+        return acao # único ponto de saída para reduzir entropia

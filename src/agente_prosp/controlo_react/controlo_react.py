@@ -1,6 +1,6 @@
-from ecr.comportamento import Comportamento
+from agente.controlo import Controlo
 
-class ControloReact(Comportamento):
+class ControloReact(Controlo):
     """
     Um controlo reativo é um controlo que pertence ao agente reativo
     em que as percepcoes são processadas consoante o comportamento, esse
@@ -16,4 +16,4 @@ class ControloReact(Comportamento):
         é processado e retorna uma ação que vai ser retornada por este método.
         """
         
-        return self.__comportamento.ativar(percepcao) # vai retornar a ação
+        return self.__comportamento.activar(percepcao) # vai retornar a ação

@@ -1,7 +1,8 @@
-from resposta import Resposta
-from estimulo import Estimulo
+from .resposta import Resposta
+from .estimulo import Estimulo
+from ecr.comportamento import Comportamento
 
-class Reaccao:
+class Reaccao(Comportamento):
     """Representa uma reação completa no ciclo reativo.
 
     A reação junta dois componentes, um Estimulo (que avalia a perceção) e uma Resposta (que define a ação).
@@ -16,8 +17,8 @@ class Reaccao:
         processo reativo, medir a relevância de uma situação e produzir a
         resposta dessa situação.
         """
-        self.__estimulo = Estimulo()
-        self.__resposta = Resposta()
+        self.__estimulo = estimulo
+        self.__resposta = resposta
     
     def activar(self, percepcao):
         """Ativa a reação para a perceção recebida.
@@ -30,6 +31,7 @@ class Reaccao:
         """
 
         # Primeiro mede-se a relevância da situação atual através do estímulo.
+        accao = None
         intensidade = self.__estimulo.detectar(percepcao)
         if intensidade > 0:
             # Se houver ativação, delega-se na resposta a construção da ação.

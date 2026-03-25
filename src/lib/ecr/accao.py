@@ -1,5 +1,5 @@
 # Este import permitemudar o nome da classe Accao para AccaoAgente
-from agente import Accao as AccaoAgente
+from agente.acao import Accao as AccaoAgente
 
 class Accao(AccaoAgente):
     """Representa uma ação no ciclo de controlo do agente.

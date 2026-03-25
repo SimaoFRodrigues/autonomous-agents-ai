@@ -1,7 +1,5 @@
 from abc import ABC, abstractmethod
 
-from comport_comp import ComportComp
-
 class Comportamento(ABC):
     """Classe base para os comportamentos do agente.
 

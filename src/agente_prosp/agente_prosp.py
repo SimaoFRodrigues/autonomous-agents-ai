@@ -10,7 +10,7 @@ class AgenteProsp(Agente):
     def __init__(self, controlo):
         """Inicializa a estrutura base do agente prospetivo.
         """
-        super.__init__(controlo)
+        super().__init__(controlo)
 
     
     def _percepcionar(self):

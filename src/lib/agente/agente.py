@@ -16,7 +16,7 @@ class Agente(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def _actuar_(self,acao):
+    def _actuar(self,acao):
         """Executa no ambiente a ação decidida pelo controlo.
         """
         raise NotImplementedError
@@ -26,7 +26,7 @@ class Agente(ABC):
         percepcao = self._percepcionar()
         acao = self._controlo.processar(percepcao)
         if acao is not None:
-            self._actuar_(acao)
+            self._actuar(acao)
         
 
 

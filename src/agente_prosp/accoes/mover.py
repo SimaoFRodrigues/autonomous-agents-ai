@@ -1,4 +1,4 @@
-from ecr.acao import Accao
+from ecr.accao import Accao
 from sae.agente.movimento import Movimento # Classe que nos dará os métodos para factorização
 
 """Esta classe, juntamente com Rodar e Avancar, são um exemplo de fatorização
@@ -16,4 +16,4 @@ class Mover(Movimento, Accao):
         :param direccao: direção para onde o agente se deve mover
         :type direccao: Direccao
         """
-        super.__init__(direccao, 1) # o segundo parâmetro é o passo, neste caso 1
+        super().__init__(direccao, 1) # o segundo parâmetro é o passo, neste caso 1

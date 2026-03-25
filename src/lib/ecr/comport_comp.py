@@ -20,7 +20,7 @@ class ComportComp(Comportamento):
         analisar a perceção e propor uma ação.
 
         """
-        self.__comportamentos = comportamentos
+        pass
 
     @abstractmethod    
     def activar(self, percepcao):

@@ -1,4 +1,4 @@
-class Prioridade:
+class Prioridade(ComportComp):
     """Representa uma estratégia de seleção baseada em prioridade.
 
     No contexto deste trabalho, esta classe representa uma política de seleção

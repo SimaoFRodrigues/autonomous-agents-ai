@@ -39,7 +39,7 @@ class AgenteJogo(Agente):
         evento = self.__ambiente.observar() # Obtém o evento atual do ambiente e transforma-o numa perceção.
         return PercepcaoJogo(evento)
 
-    def _actuar_(self, acao):
+    def _actuar(self, acao):
         """Executa no ambiente o comando encapsulado na ação.
 
         Esta é a fase final do ciclo do agente. A ação já foi decidida pelo

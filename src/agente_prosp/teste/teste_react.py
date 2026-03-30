@@ -1,3 +1,4 @@
+# Neste caso, como este é o modulo teste que está a ser executado, os modulos têm de ser todos o caminho absoluto e não o relativo.
 from agente_prosp.agente_prosp import AgenteProsp
 from agente_prosp.controlo_react.controlo_react import ControloReact
 from agente_prosp.controlo_react.reacoes.explorar.explorar import Explorar

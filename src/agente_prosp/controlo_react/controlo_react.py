@@ -7,6 +7,9 @@ class ControloReact(Controlo):
     comportamento pode ser contituído por sub-comportamentos.
     """
     def __init__(self, comportamento):
+        """Iniciar o controlo reativo, o comportamento que lhe é passado como
+        parâmetro é usado no método processar() ativando com a percepção recebida 
+        como parÂmetro nesse método"""
         self.__comportamento = comportamento
     
     def processar(self, percepcao):

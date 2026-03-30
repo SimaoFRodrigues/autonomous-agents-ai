@@ -4,14 +4,10 @@ class AgenteProsp(Agente):
     """Classe base para um agente prospetivo.
 
     Um agente prospetivo combina a observação do ambiente com a decisão da ação orientada. Esta classe 
-    define o mínimo do ciclo de operação, que é percecionar e atuar.
+    define o mínimo do ciclo de operação, que é percecionar() e atuar(). A classe AgenteProsp não tem construtor 
+    porque usa o construtor da classe Agente, já que é uma especialização de Agente. Além disso, esta classe é um 
+    exemplo de arquitetura por diferenças, apenas fazemos o que é diferente.
     """
-
-    def __init__(self, controlo):
-        """Inicializa a estrutura base do agente prospetivo.
-        """
-        super().__init__(controlo)
-
     
     def _percepcionar(self):
         """Obtém a perceção atual do ambiente.

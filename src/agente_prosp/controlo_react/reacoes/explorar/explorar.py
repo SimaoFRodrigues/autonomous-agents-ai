@@ -1,11 +1,11 @@
 # O módulo random permite gerar um valor aleatório entre 0 e 1,
 # e o choice vai ser usado para escolher um elemento aleatório de uma lista de direções
-
 from random import random, choice
+
+from sae import Direccao
 
 from agente_prosp.accoes.rodar import Rodar
 from agente_prosp.accoes.avancar import Avancar
-from sae.ambiente.direccao import Direccao
 from ecr.comportamento import Comportamento
 
 class Explorar(Comportamento):
@@ -20,7 +20,8 @@ class Explorar(Comportamento):
         """
         Este método vai gerar e retornar uma ação aleatória. O parâmetro percepcao não vai ser usado porque
         a decisão é feita independentemente da percepção, ou seja, tem baixo acoplamento funcional neste caso.
-        Além disso, usa polimorfismo porque pode ser trocada por outros comportamentos sem mudar o controlo.
+        Além disso, usa polimorfismo porque pode ser trocada por outros comportamentos sem mudar o controlo, 
+        neste caso é recebido o parâmetro percepcao apesar de no Explorar não ser utilizado.
         """
         if random() < self.__prob_rotacao: # se o valor aleatório for menor que a probabilidade de rotação, gera uma ação
             # o Rodar vai retornar uma ação baseada na escolha aleatória de um membro da lista de Direcções e essa ação é

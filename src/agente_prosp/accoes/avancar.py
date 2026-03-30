@@ -16,4 +16,4 @@ class Avancar(Movimento, Accao):
         Não requer parâmetros adicionais porque o avanço depende do estado
         atual do agente (posição e orientação).
         """
-        super().__init__(None) # None porque é na direção do agente 
+        super().__init__(None) # None porque é na direção atual do agente 

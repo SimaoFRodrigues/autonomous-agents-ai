@@ -1,3 +1,5 @@
+from .comport_comp import ComportComp
+
 class Prioridade(ComportComp):
     """Representa uma estratégia de seleção baseada em prioridade.
 

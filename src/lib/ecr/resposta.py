@@ -10,7 +10,7 @@ class Resposta:
     já avaliada e transforma-a numa ação.
     """
 
-    def __init__(self, accao):
+    def __init__(self, accao=None):
         """Inicializa a resposta com a ação associada.
 
         A ação associada funciona como base para a decisão desta resposta.
@@ -19,7 +19,7 @@ class Resposta:
         """
         self._accao = accao
     
-    def activar(self, intensidade):
+    def activar(self, percepcao, intensidade):
         """Ativa a resposta e devolve a ação correspondente.
 
         A lógica deste método permite obter a ação associada a esta
@@ -30,9 +30,10 @@ class Resposta:
 
         # Obtém a ação definida para esta resposta e, se existir, adapta a
         # prioridade dessa ação ao nível de ativação recebido.
-        if self._obter_accao is not None:
-            self._acao.prioridade(intensidade)
-            return self._accao
+        accao = self._obter_accao(percepcao)
+        if accao is not None:
+            accao.prioridade = intensidade
+        return accao
         
 
     def _obter_accao(self, percepcao):

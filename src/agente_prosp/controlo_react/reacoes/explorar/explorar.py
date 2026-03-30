@@ -10,8 +10,12 @@ from ecr.comportamento import Comportamento
 
 class Explorar(Comportamento):
     """
-    O objetivo do comportamento explorar decidir que ação de exploração gerar (Rodar ou Avancar). 
-    Este comportamento tem de ter o método ativar e vai rodar aleatoriamente com uma determinada probabilidade. 
+    A classe é relativa ao comportamento explorar, que tem como objetivo decidir que ação de exploração gerar (Rodar ou Avancar). 
+    Este comportamento tem de ter o método ativar e vai rodar aleatoriamente com uma determinada probabilidade. O comportamento
+    Explorar() derivado desta classe, pode originar comportamentos cíclicos e podem ficar presos em alguns cantos do mapa, o que 
+    pode causar o funcionamento incorreto do agente. Para a solução foi implementar a classe ExplorarMem, que Avança e guarda os
+    movimentos anteriores de forma a combater esses erros.
+    
     """
     def __init__(self, prob_rotacao = 0.7):
         self.__prob_rotacao = prob_rotacao # probabilidade de rotação predefinida, que serve como threshold para ativar a ação aleatória

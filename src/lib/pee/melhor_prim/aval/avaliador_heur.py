@@ -21,5 +21,5 @@ class AvaliadorHeur:
     
     @heuristica.setter
     def heuristica(self, heuristica):
-        """Setter permite injetar heurística"""
+        """Setter que permite injetar heurística"""
         self.__heuristica = heuristica

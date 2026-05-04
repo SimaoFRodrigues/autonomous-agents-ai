@@ -66,7 +66,7 @@ def teste_contagem(valor_inicial, valor_final, incrementos, mecanismos_procura):
         print("Custo: ", solucao.custo)
 
 ###
-print("\n---------- Teste de problema sem ciclos ----------")
-teste_contagem(VALOR_INICIAL, VALOR_FINAL, INCREMENTOS, MECANISMOS_PROCURA)
+#print("\n---------- Teste de problema sem ciclos ----------")
+#teste_contagem(VALOR_INICIAL, VALOR_FINAL, INCREMENTOS, MECANISMOS_PROCURA)
 print("\n---------- Teste de problema com ciclos ----------")
 teste_contagem(VALOR_INICIAL, VALOR_FINAL, INCREM_CICLO, MECANISMOS_PROCURA[1:])

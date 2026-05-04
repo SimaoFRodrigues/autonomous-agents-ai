@@ -15,5 +15,5 @@ class ProcuraInformada(ProcuraMelhorPrim):
         """
         Este método executa a procura informada injetando a heurística no avaliador
         """
-        self._avaliador.heuristica = heuristica
+        self._avaliador.heuristica = heuristica # guarda no avaliador a respetiva heurística
         return super().procurar(problema)

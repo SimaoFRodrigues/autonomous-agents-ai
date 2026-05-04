@@ -8,5 +8,5 @@ class AvaliadorSof(AvaliadorHeur):
     prioridade() sobreescrevendo com a procura sôfrega, sendo este o exemplo de polimorfismo.
     """
     def prioridade(self, no):
-        """Retorna f(n) = h(n) - apenas a estimativa heurística"""
+        """Retorna a função f(n) = h(n) - apenas a estimativa heurística"""
         return self.heuristica.h(no.estado) # f(n) = h(n)

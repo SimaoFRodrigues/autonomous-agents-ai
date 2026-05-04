@@ -2,8 +2,11 @@ from sae.ambiente.elemento import Elemento
 
 class MecDelib: 
     """
-    O MacDelib gera os objetivos que devem ser alcançados relativos aos agentes 
-    deliberativos.
+    A classe MecDelib concentra a parte deliberativa que escolhe objetivos a partir do
+    modelo interno do mundo.
+    Esta classe separa a decisão de alto nivel do resto do comportamento do agente, o que 
+    melhora a organizacao do código e facilita a extensão do sistema. O objeto trabalha sobre 
+    o modelo do mundo sem expor diretamente os detalhes internos desse modelo.
     """
     def __init__(self, modelo_mundo):
         self.__modelo_mundo = modelo_mundo
@@ -25,12 +28,11 @@ class MecDelib:
 
     def _selecionar_objetivos(self, objetivos):
         """
-        O método filtra os objetivos gerando uma lista de estados de agente. O critério de seleção é o objetivo 
-        vai ser recolher o objetivo mais próximo com o método distancia() do modelo do mundo.
-
-        Para isto é necessário através da lista de objetivos, que contém os estados do agente, guardar a distãncia
-        do estado atual para o sucessor em cada um dos estados, e ordena os estados baseado na distância. A ordenação 
-        facilita a extração do estado mais próximo.
+        O método filtra os objetivos gerando uma lista de estados de agente. O critério de seleção é  
+        recolher o objetivo mais próximo com o método distancia() do modelo do mundo.
+        Para isto é necessário através da lista de objetivos, que contém os estados do agente, guardar 
+        a distância do estado atual para o sucessor em cada um dos estados, e ordenar os estados baseado 
+        na distância. A ordenação facilita a extração do estado mais próximo.
         """
         objetivos.sort(key=self.__modelo_mundo.distancia) # o método sort vai guardar todas as distâncias e ordenar a lista conforme a distância
         return [objetivos[:1]] # retorna o primeiro elemento da lista através do slice

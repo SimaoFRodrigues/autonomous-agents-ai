@@ -4,13 +4,11 @@ from mec_delib import MecDelib
 
 class ControloDelib(Controlo):
     """
-    O ControloDelib processa internamente um ciclo de tomada de decisão e ação 
-    que foi criado antes, ou seja, perante as percepções obtidas do ambiente, 
-    gera as ações que devem ser realizadas. Esta classe realiza a interface Controlo 
-    do pacote agente, já que o agente pode ser criado desde que tenha uma classe 
-    que realize a interface Controlo associada.
-    Esta classe dá a estrutura base usando o mecanismo deliberativo modularizado na 
-    classe mec_delib.
+    A classe ControloDelib implementa a interface Controlo e organiza o ciclo deliberativo do agente.
+    Esta classe junta herança e implementação de interface já que herda de Controlo
+    para respeitar o esperado pelo sistema, e coordena a assimilacao, deliberacao, planeamento e
+    execução. O resultado é um controlador modular, mais fácil de reutilizar e de substituir por 
+    outras estratégias de controlo.
     """
     def __init__(self, planeador):
         self.__planeador = planeador
@@ -46,10 +44,18 @@ class ControloDelib(Controlo):
         self.__objetivos = self.__mec_delib.deliberar()
 
     def _planear(self):
-        """"""
+        """
+        Constrói um plano de ação a partir dos objetivos
+        deliberados, delegando a tarefa ao `planeador` fornecido.
+        """
 
     def _executar(self):
-        """"""
+        """
+        Executa o plano atual, invocando as ações sobre o modelo do mundo e atualizando 
+        o plano conforme cada ação é consumida, reconsiderando se necessário.
+        """
 
     def _mostrar(self):
-        """"""
+        """
+        Exibe o estado interno para visualização.
+        """

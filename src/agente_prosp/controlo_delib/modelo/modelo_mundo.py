@@ -6,9 +6,10 @@ import math
 
 class ModeloMundo:
     """
-    O ModeloMundo mantém a informação da representação das ações que ele pode 
-    realizar no mundo. Esta classe é composta por um conjunto de operadores e 
-    tem um dicionário que contém uma representação interna do mundo.
+    O ModeloMundo guarda a representação interna do mundo que o agente vai construindo com base nas percepçoes.
+    Esta classe usa encapsulamento para manter escondidos os dados internos, como o estado atual, 
+    os estados conhecidos e os elementos do ambiente. Também funciona como ponto de ligação entre o 
+    agente e os operadores que permitem simular movimentos no mundo.
     """
     def __init__(self):
         """"""
@@ -60,8 +61,8 @@ class ModeloMundo:
     def atualizar(self, percepcao):
         """
         O método recebe uma percepção e permite atualizar o estado atual do agente e atualizar a 
-        variável booleanda que indica se foi ou não alterado (isto é, se os elementos que vêm da percepção 
-        e os do mundo atual são diferentes).
+        variável booleanda que indica se foi ou não alterado (isto é, se os elementos que vêm da 
+        percepção e os do mundo atual são diferentes).
         """
         self.__estado = EstadoAgente(percepcao.posicao)
         self.__alterado = self.__elementos != percepcao.elementos
@@ -81,4 +82,9 @@ class ModeloMundo:
         vista.marcar_posicao(self._estado.posicao) # vemos um retângulo amarelo na posição do agente
 
     def __contains__(self, estado):
+        """
+        O __contains__ é um método especial do python que permite usar o operador `in` com objetos
+        de ModeloMundo. Neste caso, verifica se o estado recebido já pertence à lista de estados
+        conhecidos pelo agente.
+        """
         return estado in self.__estados

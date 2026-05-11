@@ -2,14 +2,19 @@ from sae.ambiente.direccao import Direccao
 from operador_mover import OperadorMover
 from estado_agente import EstadoAgente
 from sae.ambiente.elemento import Elemento
+from plan.modelo.modelo_plan import ModeloPlan
+
 import math
 
-class ModeloMundo:
+class ModeloMundo(ModeloPlan):
     """
     O ModeloMundo guarda a representação interna do mundo que o agente vai construindo com base nas percepçoes.
     Esta classe usa encapsulamento para manter escondidos os dados internos, como o estado atual, 
     os estados conhecidos e os elementos do ambiente. Também funciona como ponto de ligação entre o 
     agente e os operadores que permitem simular movimentos no mundo.
+
+    Esta classe implementa a interface do modelo de planeamento podendo ser usado num planeador, esta 
+    interface define os métodos de obtenção de estado, estados e operadores da forma desejada.
     """
     def __init__(self):
         """"""
@@ -49,7 +54,7 @@ class ModeloMundo:
         O método acede o dicionário Elemento usando o método .get() que acede a posição do estado. 
         Por fim retorna o elemento com base no estado do agente.
         """
-        return self.__elementos.get() # o método .get() do dicionário faz com que se não existir, retorna None por omissão
+        return self.__elementos.get(estado.posicao) # o método .get() do dicionário faz com que se não existir, retorna None por omissão
         
 
     def distancia(self, estado):

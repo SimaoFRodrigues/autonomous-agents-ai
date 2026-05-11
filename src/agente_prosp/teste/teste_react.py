@@ -3,7 +3,6 @@ from agente_prosp.agente_prosp import AgenteProsp
 from agente_prosp.controlo_react.controlo_react import ControloReact
 from agente_prosp.controlo_react.reacoes.recolher.recolher import Recolher
 from sae import Simulador 
-
 """
 Abaixo é criada uma instância de um agente prospetor. AgenteProsp tem no seu construtor um Agente,
 e esse Agente tem no seu construtor um Controlo, que será o ControloReact. O ControloReact recebe

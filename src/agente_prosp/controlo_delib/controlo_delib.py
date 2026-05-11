@@ -1,5 +1,5 @@
 from agente.controlo import Controlo
-from modelo.modelo_mundo import ModeloMundo
+from .modelo.modelo_mundo import ModeloMundo
 from mec_delib import MecDelib
 
 class ControloDelib(Controlo):
@@ -20,17 +20,27 @@ class ControloDelib(Controlo):
     def processar(self, percepcao):
         """
         O método processar observa o modelo do mundo e gera percepções a realizar, sendo assim
-        o primeiro passo no processo de tomada de decisão e ação.
+        o primeiro passo no processo de tomada de decisão e ação. O processo feito foi realizado 
+        de acordo com o diagrama de atividades disponibilizado. É feita a assimilação tendo em conta a percepção
+        de entrada do método, se for preciso reconsiderar é necessário deliberar, planear e executar, senão apenas 
+        executa, guardando independentemente do resultado de reconsiderar(), a ação retornada pelo executar().
         """
+        self.__assimilar(percepcao) # atualiza o modelo do mundo com a percepção atribuida como parâmetro
+        if self.__reconsiderar():
+            self.__deliberar()
+            self.__planear()
+        acao = self.__executar() # este método é guardado numa variável para ser retornado no fim, já que _executar() retorna uma ação.
+        return acao
+        
 
-    def _assimilar(self, percepcao):
+    def __assimilar(self, percepcao):
         """
         O método privado assimilar vai atualizar o modelo do mundo baseando-se no
         parâmetro de percepção, sendo o segundo passo do processo de tomada de decisão e ação.
         """
         return self.__modelo.mundo.atualizar(percepcao)
 
-    def _reconsiderar(self):
+    def __reconsiderar(self):
         """
         O método retorna um booleano que indica se é ou não para reconsiderar, sendo este o terceiro
         passo no processo de tomada de decisão e ação.
@@ -42,27 +52,51 @@ class ControloDelib(Controlo):
         return self.__modelo_mundo.alterado or not self.__plano 
 
 
-    def _deliberar(self):
+    def __deliberar(self):
         """
         Este método inicia os objetivos preenchendo a lista com os objetivos 
         deliberados, sendo este o quarto passo no processo de tomada de decisão e ação.
         """
         self.__objetivos = self.__mec_delib.deliberar()
 
-    def _planear(self):
+    def __planear(self):
         """
         Constrói um plano de ação a partir dos objetivos deliberados, delegando a tarefa ao 
-        planeador fornecido e sendo o quinto passo no plano de tomada de decisão e ação.
+        planeador fornecido e sendo o quinto passo no plano de tomada de decisão e ação. Se existirem
+        objetivos, sobre o planeador faz se planear e atualizamos o plano, senão colocamos
+        o plano a None, já que se não há objetivos não há plano.
         """
+        if self.__objetivos:
+            self.__plano = self.__planeador.planear(self.__modelo_mundo, self.__objetivos)
+        else:
+            self.__plano = None
 
-    def _executar(self):
+
+    def __executar(self):
         """
         Executa o plano atual, invocando as ações sobre o modelo do mundo e atualizando 
-        o plano conforme cada ação é consumida, reconsiderando se necessário. Este é o passo final
-        do ciclo do plano de tomada de decisão e ação.
+        o plano conforme cada ação é consumida. Este é o passo final do ciclo do plano de 
+        tomada de decisão e ação. Este método vai retornar uma ação.
         """
+        self.__mostrar()
+        if self.__plano:
+            estado = self.__modelo_mundo.obter_estado() # obtém o estado atual do mundo
+            operador = self.__plano.obter_acao(estado) # obtém o operador do plano coorespondente ao estado atual
+            if operador:
+                return operador.acao # se o operador existir, retorna a ação do operador
+            else:
+                self.__plano = None
 
-    def _mostrar(self):
+    def __mostrar(self):
         """
-        Exibe o estado interno para visualização.
+        O método limpa a vista, se existir plano mostra-o e se existirem objetivos, 
+        para cada um vai marcar a posição passando a posição do objetivo.
         """
+        sae.vista.limpar() # limpa para não acumular coisas entre passos
+        self.__modelo_mundo.mostrar(sae.vista)
+        if self.__plano:
+            self.__plano.mostrar(sae.vista)
+
+        if self.__objetivos:
+            for objetivo in self.__objetivos:
+                sae.vista.marcar_posicao(objetivo.posicao)

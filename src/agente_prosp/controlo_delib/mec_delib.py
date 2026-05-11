@@ -24,11 +24,12 @@ class MecDelib:
         O método gera todos os objetivos possíveis e retorna uma 
         lista de estados do agente que tenham o elemento 'ALVO'.
         """
-        return [estado for estado in self.__modelo_mundo.obter_estados() if self.__modelo_mundo.obter_elemento(estado) == Elemento.ALVO]
+        return [estado for estado in self.__modelo_mundo.obter_estados() 
+                if self.__modelo_mundo.obter_elemento(estado) == Elemento.ALVO]
 
     def _selecionar_objetivos(self, objetivos):
         """
-        O método filtra os objetivos gerando uma lista de estados de agente. O critério de seleção é  
+        O método filtra os objetivos ao gerar uma lista de estados de agente. O critério de seleção é  
         recolher o objetivo mais próximo com o método distancia() do modelo do mundo.
         Para isto é necessário através da lista de objetivos, que contém os estados do agente, guardar 
         a distância do estado atual para o sucessor em cada um dos estados, e ordenar os estados baseado 
@@ -36,3 +37,5 @@ class MecDelib:
         """
         objetivos.sort(key=self.__modelo_mundo.distancia) # o método sort vai guardar todas as distâncias e ordenar a lista conforme a distância
         return [objetivos[:1]] # retorna o primeiro elemento da lista através do slice
+        # usamos o slice em vez do [0] porque isso retornaria-nos um elemento que ia gerar
+        # erros silenciosos, já que em vez de trabalhar com uma lista passaria a trbaalhar com um elemento.
